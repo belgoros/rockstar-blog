@@ -4,48 +4,41 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
-
-    render json: @posts
+    json_response @posts
   end
 
   # GET /posts/1
   def show
-    render json: @post
+    json_response @post
   end
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
-
-    if @post.save
-      render json: @post, status: :created, location: @post
-    else
-      render json: @post.errors, status: :unprocessable_entity
-    end
+    @post = Post.create!(post_params)
+    json_response @post, :created
   end
 
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      render json: @post
+      head :no_content
     else
-      render json: @post.errors, status: :unprocessable_entity
+      json_response @post.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /posts/1
   def destroy
     @post.destroy
+    head :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.permit(:title, :body)
     end
 end
