@@ -5,4 +5,6 @@ class Post < ApplicationRecord
               case_sensitive: false
             }
   validates :body, presence: true
+
+  has_many :comments, as: :commentable
 end
