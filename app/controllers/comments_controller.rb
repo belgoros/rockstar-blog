@@ -4,7 +4,12 @@ class CommentsController < ApplicationController
   def index
     @comments = @commentable.comments
     json_response @comments
-  end  
+  end
+
+  def create
+    @comment = @commentable.comments.create!(comment_params)
+    json_response @comment, :created
+  end
 
   private
 
