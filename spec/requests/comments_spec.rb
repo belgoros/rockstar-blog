@@ -32,36 +32,40 @@ RSpec.describe 'Comments', type: :request do
   end
 
   describe 'POST /posts/:post_id/comments' do
-    let(:post)    { create(:post)}
-    let(:comment) { build(:comment, commentable: post)}
-
+    let(:a_post)    { create(:post)}
+    let(:comment) { build(:comment, commentable: a_post)}
     let(:valid_params) do
-      ams_json(Comment, body: comment.body)
+      {
+        body: comment.body
+      }
     end
 
-    it 'creates a new comment for the post' do
-      pending 'To be implemented'
-      expect {
-        post "/posts/#{post.id}/comments", params: valid_params
-      }.to change(post.comments, :count).by(1)
-      expect(response).to have_http_status(201)
+    context 'when the request is valid' do
+      it 'creates a new post comment' do
+        expect {
+          post "/posts/#{a_post.id}/comments", params: valid_params
+        }.to change(a_post.comments, :count).by(1)
+        expect(response).to have_http_status(201)
+      end
     end
   end
 
   describe 'POST /comments/:comment_id/comments' do
     let(:comment)    { create(:comment)}
-    let(:threaded_comment) { build(:comment, commentable: comment)}
-
+    let(:thread_comment) { build(:comment, commentable: comment)}
     let(:valid_params) do
-      ams_json(Comment, body: threaded_comment.body)
+      {
+        body: thread_comment.body
+      }
     end
 
-    it 'creates a new comment for the existing comment' do
-      pending 'To be implemented'
-      expect {
-        post "/comments/#{comment.id}/comments", params: valid_params
-      }.to change(comment.comments, :count).by(1)
-      expect(response).to have_http_status(201)
+    context 'when the request is valid' do
+      it 'creates a new comment of comment' do
+        expect {
+          post "/comments/#{comment.id}/comments", params: valid_params
+        }.to change(comment.comments, :count).by(1)
+        expect(response).to have_http_status(201)
+      end
     end
   end
 end

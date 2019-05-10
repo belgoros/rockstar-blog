@@ -13,10 +13,3 @@ To populate the database, run `rails db:setup`,  see `seeds.rb` for more details
 
 RSpec is used as testing framework.
 Run `rspec` to run the tests.
-
-
-### TODO
-
-Fix pending request spec examples to create a comment.
-
-
