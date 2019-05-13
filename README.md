@@ -1,4 +1,4 @@
-# Rock Stars Blog
+[![CircleCI](https://circleci.com/gh/belgoros/rockstar-blog/tree/master.svg?style=svg)](https://circleci.com/gh/belgoros/rockstar-blog/tree/master) # Rock Stars Blog
 
 Exercise blog engine Rails API providing JSON API for posts and comments in a threaded way like Slack or Reddit.
 One or many comments can be added either to a Post or to a comment.
