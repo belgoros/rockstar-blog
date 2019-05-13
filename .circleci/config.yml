@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.1-stretch-browsers
+      - image: circleci/ruby:2.6.1
     steps:
       - checkout
 
@@ -44,9 +44,7 @@ jobs:
 
             bundle exec rspec \
               --format progress \
-              --format RspecJunitFormatter \
               --out /tmp/test-results/rspec.xml \
-              --format progress \
               $TEST_FILES
 
       # collect reports
